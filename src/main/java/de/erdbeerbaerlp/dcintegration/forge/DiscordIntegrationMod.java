@@ -466,6 +466,9 @@ public class DiscordIntegrationMod {
         })) return;
 
         final String text = MessageUtils.escapeMarkdown(ev.getMessage().replace("@everyone", "[at]everyone").replace("@here", "[at]here"));
+
+        if (text.startsWith(Configuration.instance().messages.sayCommandIgnoredPrefix)) return;
+
         final MessageEmbed embed = ForgeMessageUtils.genItemStackEmbedIfAvailable(msg);
         if (INSTANCE != null) {
             GuildMessageChannel channel = INSTANCE.getChannel(Configuration.instance().advanced.chatOutputChannelID);
